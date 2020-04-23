@@ -5,6 +5,7 @@ import java.util.List;
 import com.xmb.workout.network.BaseController;
 import com.xmb.workout.network.PageUtils;
 import com.xmb.workout.network.Result;
+import com.xmb.workout.utils.RedisUtils;
 import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryDTO;
 import com.xmb.workout.workout.vo.ToNowStatisticsVO;
 import com.xmb.workout.workout.vo.TodayStatisticsVO;
@@ -29,6 +30,9 @@ import com.xmb.workout.workout.service.WorkoutRecordService;
 public class WorkoutRecordController extends BaseController {
     @Autowired
     private WorkoutRecordService workoutRecordService;
+
+    @Autowired
+    private RedisUtils redisUtils;
 
     /**
      * 列表
@@ -64,5 +68,13 @@ public class WorkoutRecordController extends BaseController {
     public Result<ToNowStatisticsVO> toNowStatistics() {
 
         return Result.ok(workoutRecordService.toNowStatistics(getCurrentUser()));
+    }
+
+    @ApiOperation(value = "测试",notes = "测试",consumes = "application/json")
+    @PostMapping("/test")
+    public Result test() {
+
+        redisUtils.delete("testKey");
+        return Result.ok(redisUtils.get("testKey"));
     }
 }
