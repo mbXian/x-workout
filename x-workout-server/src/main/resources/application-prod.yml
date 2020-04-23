@@ -21,7 +21,7 @@ spring:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/x_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
-    password: 123456
+    password: Xmb123456
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
@@ -43,4 +43,4 @@ spring:
         min-idle: 5       # 连接池中的最小空闲连接
 
 logback:
-  path: /Users/xian/Desktop/log3
+  path: /data/log/x-workout

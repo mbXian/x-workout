@@ -11,6 +11,7 @@ import com.xmb.workout.workout.vo.ToNowStatisticsVO;
 import com.xmb.workout.workout.vo.TodayStatisticsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,7 @@ import com.xmb.workout.workout.service.WorkoutRecordService;
  * @email 
  * @date 2020-04-22 11:23:29
  */
+@Slf4j
 @Api(description = "训练记录模块")
 @RestController
 @RequestMapping("workout/workoutrecord")
@@ -73,7 +75,7 @@ public class WorkoutRecordController extends BaseController {
     @ApiOperation(value = "测试",notes = "测试",consumes = "application/json")
     @PostMapping("/test")
     public Result test() {
-
+        log.info("dasdj");
         redisUtils.delete("testKey");
         return Result.ok(redisUtils.get("testKey"));
     }
