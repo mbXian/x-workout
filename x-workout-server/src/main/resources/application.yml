@@ -1,13 +1,13 @@
 # server config
 server:
-  port: 8090
+  port: 8091
 
 spring:
   application:
     name: x-workout
   # 环境 dev|test|prod
   profiles:
-    active: dev
+    active: prod
   # jackson时间格式化
   jackson:
     time-zone: GMT+8
