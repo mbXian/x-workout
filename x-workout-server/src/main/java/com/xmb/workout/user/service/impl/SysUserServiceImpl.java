@@ -1,6 +1,6 @@
 package com.xmb.workout.user.service.impl;
 
-import com.xmb.workout.utils.MD5Utils;
+import com.xmb.common.utils.MD5Utils;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xmb.workout.user.dao.SysUserDao;

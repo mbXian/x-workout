@@ -1,10 +1,10 @@
 package com.xmb.workout.workout.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.xmb.common.utils.DateUtils;
 import com.xmb.workout.user.entity.SysUserEntity;
 import com.xmb.workout.user.service.SysUserService;
 import com.xmb.workout.utils.CodeGenerateUtils;
-import com.xmb.workout.utils.DateUtils;
 import com.xmb.workout.workout.constant.WorkoutTypeEnum;
 import com.xmb.workout.workout.dto.QueryStartOrEndTimeDTO;
 import com.xmb.workout.workout.dto.StatisticsDurationAndTimesDTO;

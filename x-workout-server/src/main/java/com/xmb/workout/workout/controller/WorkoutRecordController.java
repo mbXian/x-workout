@@ -2,9 +2,9 @@ package com.xmb.workout.workout.controller;
 
 import java.util.List;
 
+import com.xmb.common.network.PageUtils;
+import com.xmb.common.network.Result;
 import com.xmb.workout.network.BaseController;
-import com.xmb.workout.network.PageUtils;
-import com.xmb.workout.network.Result;
 import com.xmb.workout.utils.RedisUtils;
 import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryDTO;
 import com.xmb.workout.workout.vo.ToNowStatisticsVO;
