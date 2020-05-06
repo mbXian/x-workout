@@ -2,6 +2,8 @@ package com.xmb.workout.workout.controller;
 
 import java.util.List;
 
+import com.xmb.auth.AuthCenterUserApiService;
+import com.xmb.auth.auth.dto.CheckoutPasswordDTO;
 import com.xmb.common.network.PageUtils;
 import com.xmb.common.network.Result;
 import com.xmb.workout.network.BaseController;
@@ -32,9 +34,10 @@ import com.xmb.workout.workout.service.WorkoutRecordService;
 public class WorkoutRecordController extends BaseController {
     @Autowired
     private WorkoutRecordService workoutRecordService;
-
     @Autowired
     private RedisUtils redisUtils;
+    @Autowired
+    private AuthCenterUserApiService authCenterUserApiService;
 
     /**
      * 列表
@@ -43,6 +46,11 @@ public class WorkoutRecordController extends BaseController {
     @PostMapping("/list")
     public Result list(){
         List<WorkoutRecordEntity> list = workoutRecordService.list();
+
+        CheckoutPasswordDTO dto = new CheckoutPasswordDTO();
+        dto.setMobile("18824140606");
+        dto.setPassword("123456");
+        boolean b = authCenterUserApiService.checkUserMobilePassword(dto);
 
         return Result.ok(new PageUtils(list, list.size(), 10, 1));
     }

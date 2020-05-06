@@ -19,6 +19,7 @@
     <modules>
         <module>x-workout-server</module>
         <module>x-workout-data</module>
+        <module>x-workout-api</module>
     </modules>
 
     <dependencies>
