@@ -1,13 +1,11 @@
 package com.xmb.workout.workout.controller;
 
 import java.util.List;
-
 import com.xmb.auth.AuthCenterUserApiService;
 import com.xmb.auth.auth.dto.CheckoutPasswordDTO;
 import com.xmb.common.network.PageUtils;
 import com.xmb.common.network.Result;
 import com.xmb.workout.network.BaseController;
-import com.xmb.workout.utils.RedisUtils;
 import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryDTO;
 import com.xmb.workout.workout.vo.ToNowStatisticsVO;
 import com.xmb.workout.workout.vo.TodayStatisticsVO;
@@ -34,8 +32,6 @@ import com.xmb.workout.workout.service.WorkoutRecordService;
 public class WorkoutRecordController extends BaseController {
     @Autowired
     private WorkoutRecordService workoutRecordService;
-    @Autowired
-    private RedisUtils redisUtils;
     @Autowired
     private AuthCenterUserApiService authCenterUserApiService;
 
@@ -84,7 +80,6 @@ public class WorkoutRecordController extends BaseController {
     @PostMapping("/test")
     public Result test() {
         log.info("dasdj");
-        redisUtils.delete("testKey");
-        return Result.ok(redisUtils.get("testKey"));
+        return Result.ok();
     }
 }
