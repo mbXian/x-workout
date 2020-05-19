@@ -1,9 +1,8 @@
 package com.xmb.workout.workout.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.xmb.auth.entity.SysUserEntity;
 import com.xmb.common.utils.DateUtils;
-import com.xmb.workout.user.entity.SysUserEntity;
-import com.xmb.workout.user.service.SysUserService;
 import com.xmb.workout.utils.CodeGenerateUtils;
 import com.xmb.workout.workout.constant.WorkoutTypeEnum;
 import com.xmb.workout.workout.dto.QueryStartOrEndTimeDTO;
@@ -33,8 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, WorkoutRecordEntity> implements WorkoutRecordService {
 
     @Autowired
-    private SysUserService sysUserService;
-    @Autowired
     private WorkoutRecordDetailService workoutRecordDetailService;
 
     /**
@@ -43,7 +40,7 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void enterDailyDataTemporary(WorkoutRecordEnterDailyTemporaryDTO workoutRecordEnterDailyTemporaryDTO, SysUserEntity sysUserEntity) throws Exception {
+    public void enterDailyDataTemporary(WorkoutRecordEnterDailyTemporaryDTO workoutRecordEnterDailyTemporaryDTO, SysUserEntity sysUserEntity) {
         log.info("参数 = {}", JSON.toJSONString(workoutRecordEnterDailyTemporaryDTO));
         Date currentDate = new Date();
         WorkoutRecordEntity workoutRecordEntity = new WorkoutRecordEntity();
@@ -53,11 +50,6 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
         workoutRecordEntity.setFinishTime(currentDate);
         workoutRecordEntity.setLatitude(workoutRecordEnterDailyTemporaryDTO.getLatitude());
         workoutRecordEntity.setLongitude(workoutRecordEnterDailyTemporaryDTO.getLongitude());
-
-        boolean checkUserMobilePassword = sysUserService.checkUserMobilePassword(workoutRecordEntity.getUserMobile(), workoutRecordEnterDailyTemporaryDTO.getPassword());
-        if (!checkUserMobilePassword) {
-            throw new Exception("密码错误");
-        }
 
         List<WorkoutRecordDetailEntity> detailEntityList = new ArrayList<WorkoutRecordDetailEntity>();
 

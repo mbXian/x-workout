@@ -1,9 +1,9 @@
 package com.xmb.workout.lifestyle.controller;
 
+import com.xmb.auth.controller.BaseController;
 import com.xmb.common.network.Result;
 import com.xmb.workout.lifestyle.RecommendMealDTO;
 import com.xmb.workout.lifestyle.service.MealService;
-import com.xmb.workout.network.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
