@@ -4,6 +4,7 @@ import java.util.List;
 import com.xmb.auth.AuthCenterUserApiService;
 import com.xmb.auth.auth.dto.CheckoutPasswordDTO;
 import com.xmb.auth.controller.BaseController;
+import com.xmb.auth.entity.SysUserEntity;
 import com.xmb.common.network.PageUtils;
 import com.xmb.common.network.Result;
 import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryDTO;
@@ -55,7 +56,9 @@ public class WorkoutRecordController extends BaseController {
     @PostMapping("/enterDailyDataTemporary")
     public Result<Boolean> enterDailyDataTemporary(@RequestBody @Validated WorkoutRecordEnterDailyTemporaryDTO workoutRecordEnterDailyTemporaryDTO) {
 
-        workoutRecordService.enterDailyDataTemporary(workoutRecordEnterDailyTemporaryDTO, getUser());
+        SysUserEntity sysUserEntity = new SysUserEntity();
+        sysUserEntity.setMobile("18824140606");
+        workoutRecordService.enterDailyDataTemporary(workoutRecordEnterDailyTemporaryDTO, sysUserEntity);
         return Result.ok(Boolean.TRUE);
     }
 
@@ -63,14 +66,18 @@ public class WorkoutRecordController extends BaseController {
     @PostMapping("/todayStatistics")
     public Result<TodayStatisticsVO> todayStatistics() {
 
-        return Result.ok(workoutRecordService.todayStatistics(getUser()));
+        SysUserEntity sysUserEntity = new SysUserEntity();
+        sysUserEntity.setMobile("18824140606");
+        return Result.ok(workoutRecordService.todayStatistics(sysUserEntity));
     }
 
     @ApiOperation(value = "统计至今锻炼数据",notes = "统计至今锻炼数据",consumes = "application/json")
     @PostMapping("/toNowStatistics")
     public Result<ToNowStatisticsVO> toNowStatistics() {
 
-        return Result.ok(workoutRecordService.toNowStatistics(getUser()));
+        SysUserEntity sysUserEntity = new SysUserEntity();
+        sysUserEntity.setMobile("18824140606");
+        return Result.ok(workoutRecordService.toNowStatistics(sysUserEntity));
     }
 
     @ApiOperation(value = "测试",notes = "测试",consumes = "application/json")
