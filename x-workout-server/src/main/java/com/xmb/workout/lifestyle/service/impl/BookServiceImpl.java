@@ -18,7 +18,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public Long getTotalChapter() {
         log.info("getTotalChapter...");
-        return 10L;
+        //获取其file对象
+        File sourceFile = new File("/root/files/book/");
+        //遍历path下的文件和目录，放在File数组中
+        File[] files = sourceFile.listFiles();
+        return Long.valueOf(files.length);
     }
 
     /**
@@ -29,15 +33,15 @@ public class BookServiceImpl implements BookService {
     public BookInfoVO getBookInfo() {
         BookInfoVO bookInfoVO = new BookInfoVO();
         bookInfoVO.setChapterTotal(156L);
-        bookInfoVO.setName("那人那村那傻子");
-        bookInfoVO.setAuthor("福宝");
+        bookInfoVO.setName("丑妻撩人:总裁别太坏");
+        bookInfoVO.setAuthor("南安");
         return bookInfoVO;
     }
 
     @Override
     public BookContentVO getContent(int chapterNum) {
 
-        String content = readFileContent("/root/files/book/" + chapterNum + ".txt");
+        String content = readFileContent("/root/files/book/第" + chapterNum + "章.txt");
         log.info("chapterNum = " + chapterNum + ", content = " + content.substring(0, 10));
         BookContentVO vo = new BookContentVO();
         vo.setContent(content);
@@ -72,7 +76,7 @@ public class BookServiceImpl implements BookService {
     }
 
     public static void main(String[] args) {
-        createChapterFiles("/Users/xian/Downloads/jkl.txt");
+        createChapterFiles("/Users/xian/Downloads/book.txt");
     }
 
     public static String createChapterFiles(String fileName) {
@@ -82,13 +86,20 @@ public class BookServiceImpl implements BookService {
         try {
             reader = new BufferedReader(new FileReader(file));
             String tempStr;
-            Integer chapterNum = 743;
+            Integer chapterNum = 0;
 
             while ((tempStr = reader.readLine()) != null) {
-                String nextChaptername = "第" + (chapterNum + 1) + "章";
+                String nextChaptername = "";
+                if (chapterNum < 10) {
+                    nextChaptername = "0" + chapterNum;
+                } else if (chapterNum > 714) {
+                    break;
+                } else {
+                    nextChaptername = chapterNum + "";
+                }
                 if (tempStr.contains(nextChaptername)) {
 
-                    writeToFile(sbf.toString(), chapterNum + "");
+                    writeToFile(sbf.toString(), "第" + chapterNum + "章");
 
                     sbf = new StringBuffer();
                     chapterNum++;
