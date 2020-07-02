@@ -32,7 +32,14 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookInfoVO getBookInfo() {
         BookInfoVO bookInfoVO = new BookInfoVO();
-        bookInfoVO.setChapterTotal(156L);
+
+        //获取其file对象
+        File sourceFile = new File("/root/files/book/");
+        //遍历path下的文件和目录，放在File数组中
+        File[] files = sourceFile.listFiles();
+
+        bookInfoVO.setChapterTotal(Long.valueOf(files.length));
+        
         bookInfoVO.setName("丑妻撩人:总裁别太坏");
         bookInfoVO.setAuthor("南安");
         return bookInfoVO;
