@@ -18,7 +18,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @date 2020-03-02
  */
 @RestController
-@EnableSwagger2
 @Api(description = "读书接口")
 @RequestMapping("/book")
 public class BookController extends BaseController {

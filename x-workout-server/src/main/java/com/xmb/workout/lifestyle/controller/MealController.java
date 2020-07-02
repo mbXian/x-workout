@@ -20,7 +20,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 
 @RestController
-@EnableSwagger2
 @Api(description = "餐饮相关接口")
 @RequestMapping("/meal")
 public class MealController extends BaseController {
