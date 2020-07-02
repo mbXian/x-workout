@@ -39,7 +39,7 @@ public class BookServiceImpl implements BookService {
         File[] files = sourceFile.listFiles();
 
         bookInfoVO.setChapterTotal(Long.valueOf(files.length));
-        
+
         bookInfoVO.setName("丑妻撩人:总裁别太坏");
         bookInfoVO.setAuthor("南安");
         return bookInfoVO;
