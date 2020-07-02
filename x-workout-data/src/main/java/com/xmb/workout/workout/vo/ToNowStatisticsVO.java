@@ -13,7 +13,7 @@ import java.util.List;
 public class ToNowStatisticsVO {
     private Long duration;
     private Long times;
-    private Date startTrainTime;
-    private Date endTrainTime;
+    private Long startTrainTime;
+    private Long endTrainTime;
     private List<StatisticsEachTypeVO> statisticsEachTypeVOList;
 }

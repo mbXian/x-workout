@@ -161,8 +161,8 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
         toNowStatisticsVO.setStatisticsEachTypeVOList(statisticsEachTypeVOList);
         toNowStatisticsVO.setDuration((statisticsDurationAndTimesVO == null || statisticsDurationAndTimesVO.getDuration() == null) ? 0 : statisticsDurationAndTimesVO.getDuration());
         toNowStatisticsVO.setTimes(statisticsDurationAndTimesVO.getTimes());
-        toNowStatisticsVO.setStartTrainTime(startTrainTime);
-        toNowStatisticsVO.setEndTrainTime(endTrainTime);
+        toNowStatisticsVO.setStartTrainTime(startTrainTime.getTime());
+        toNowStatisticsVO.setEndTrainTime(endTrainTime.getTime());
         return toNowStatisticsVO;
     }
 
