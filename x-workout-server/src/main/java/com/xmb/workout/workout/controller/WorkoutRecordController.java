@@ -80,7 +80,7 @@ public class WorkoutRecordController extends BaseController {
         return Result.ok(workoutRecordService.toNowStatistics(sysUserEntity));
     }
 
-    @ApiOperation(value = "测试",notes = "测试",consumes = "application/json")
+    @ApiOperation(value = "测试接口",notes = "测试接口",consumes = "application/json")
     @PostMapping("/test")
     public Result test() {
         log.info("dasdj");
