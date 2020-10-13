@@ -59,10 +59,6 @@ public class WorkoutRecordEntity implements Serializable {
 	 */
 	private Date updateTime;
 	/**
-	 * 备注
-	 */
-	private String remark;
-	/**
 	 * 删除状态（0：未删除；1：已删除）
 	 */
 	private Integer deleted;
