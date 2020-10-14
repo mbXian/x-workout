@@ -22,6 +22,10 @@ public class WorkoutRecordEnterDailyTemporaryDTO {
     @NotNull(message = "开始训练时间不能为空")
     private Long trainTimeMilliSec;
 
+    @ApiModelProperty("结束训练时间")
+    @NotNull(message = "结束训练时间不能为空")
+    private Long finishTimeMilliSec;
+
     /**
      * 经度
      */

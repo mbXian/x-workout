@@ -47,7 +47,7 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
         workoutRecordEntity.setNumber(CodeGenerateUtils.generate(DateUtils.format(currentDate, DateUtils.DATE_TIME_PATTERN_WITHOUT_SYMBOL)));
         workoutRecordEntity.setUserMobile(sysUserEntity.getMobile());
         workoutRecordEntity.setTrainTime(new Date(workoutRecordEnterDailyTemporaryDTO.getTrainTimeMilliSec()));
-        workoutRecordEntity.setFinishTime(currentDate);
+        workoutRecordEntity.setFinishTime(new Date(workoutRecordEnterDailyTemporaryDTO.getFinishTimeMilliSec()));
         workoutRecordEntity.setLatitude(workoutRecordEnterDailyTemporaryDTO.getLatitude());
         workoutRecordEntity.setLongitude(workoutRecordEnterDailyTemporaryDTO.getLongitude());
 
