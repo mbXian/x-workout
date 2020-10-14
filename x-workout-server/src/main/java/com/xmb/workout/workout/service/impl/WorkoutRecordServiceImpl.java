@@ -37,8 +37,11 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void enterDailyDataTemporary(WorkoutRecordEnterDailyTemporaryDTO workoutRecordEnterDailyTemporaryDTO, SysUserEntity sysUserEntity) {
+    public Boolean enterDailyDataTemporary(WorkoutRecordEnterDailyTemporaryDTO workoutRecordEnterDailyTemporaryDTO, SysUserEntity sysUserEntity) throws Exception {
         log.info("参数 = {}", JSON.toJSONString(workoutRecordEnterDailyTemporaryDTO));
+        if (!"4444".equals(workoutRecordEnterDailyTemporaryDTO.getPassword())) {
+            throw new Exception("密码错误!");
+        }
         Date currentDate = new Date();
         WorkoutRecordEntity workoutRecordEntity = new WorkoutRecordEntity();
         workoutRecordEntity.setNumber(CodeGenerateUtils.generate(DateUtils.format(currentDate, DateUtils.DATE_TIME_PATTERN_WITHOUT_SYMBOL)));
@@ -103,6 +106,8 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
         this.baseMapper.insert(workoutRecordEntity);
 
         log.info(workoutRecordEntity.getTrainTime().toString());
+
+        return Boolean.TRUE;
     }
 
     /**

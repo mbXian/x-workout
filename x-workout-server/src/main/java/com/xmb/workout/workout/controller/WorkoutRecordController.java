@@ -55,12 +55,11 @@ public class WorkoutRecordController extends BaseController {
 
     @ApiOperation(value = "临时登记",notes = "临时登记",consumes = "application/json")
     @PostMapping("/enterDailyDataTemporary")
-    public Result<Boolean> enterDailyDataTemporary(@RequestBody @Validated WorkoutRecordEnterDailyTemporaryDTO workoutRecordEnterDailyTemporaryDTO) {
+    public Result<Boolean> enterDailyDataTemporary(@RequestBody @Validated WorkoutRecordEnterDailyTemporaryDTO workoutRecordEnterDailyTemporaryDTO) throws Exception {
 
         SysUserEntity sysUserEntity = new SysUserEntity();
         sysUserEntity.setMobile("18824140606");
-        workoutRecordService.enterDailyDataTemporary(workoutRecordEnterDailyTemporaryDTO, sysUserEntity);
-        return Result.ok(Boolean.TRUE);
+        return Result.ok(workoutRecordService.enterDailyDataTemporary(workoutRecordEnterDailyTemporaryDTO, sysUserEntity));
     }
 
     @ApiOperation(value = "统计今日锻炼数据",notes = "统计今日锻炼数据",consumes = "application/json")
