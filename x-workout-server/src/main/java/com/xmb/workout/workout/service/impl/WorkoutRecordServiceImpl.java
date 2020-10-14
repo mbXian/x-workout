@@ -11,10 +11,7 @@ import com.xmb.workout.workout.dto.StatisticsEachTypeDTO;
 import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryDTO;
 import com.xmb.workout.workout.entity.WorkoutRecordDetailEntity;
 import com.xmb.workout.workout.service.WorkoutRecordDetailService;
-import com.xmb.workout.workout.vo.StatisticsDurationAndTimesVO;
-import com.xmb.workout.workout.vo.StatisticsEachTypeVO;
-import com.xmb.workout.workout.vo.ToNowStatisticsVO;
-import com.xmb.workout.workout.vo.TodayStatisticsVO;
+import com.xmb.workout.workout.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -108,6 +105,11 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
         log.info(workoutRecordEntity.getTrainTime().toString());
     }
 
+    /**
+     * 今日数据统计
+     * @param sysUserEntity
+     * @return
+     */
     @Override
     public TodayStatisticsVO todayStatistics(SysUserEntity sysUserEntity) {
         Date currentDate = new Date();
@@ -132,6 +134,11 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
         return todayStatisticsVO;
     }
 
+    /**
+     * 目前数据统计
+     * @param sysUserEntity
+     * @return
+     */
     @Override
     public ToNowStatisticsVO toNowStatistics(SysUserEntity sysUserEntity) {
         Date currentDate = new Date();
@@ -164,6 +171,25 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
         toNowStatisticsVO.setStartTrainTime(startTrainTime.getTime());
         toNowStatisticsVO.setEndTrainTime(endTrainTime.getTime());
         return toNowStatisticsVO;
+    }
+
+    /**
+     * 所有的锻炼项目
+     * @return
+     */
+    @Override
+    public List<WorkoutTypeVO> workoutTypeList() {
+
+        List<WorkoutTypeVO> workoutTypeVOList = new ArrayList<WorkoutTypeVO>();
+        WorkoutTypeEnum[] workoutTypeEnums = WorkoutTypeEnum.values();
+        for (WorkoutTypeEnum workoutTypeEnum : workoutTypeEnums) {
+            WorkoutTypeVO vo = new WorkoutTypeVO();
+            vo.setName(workoutTypeEnum.name());
+            vo.setNameCN(workoutTypeEnum.getName());
+            vo.setType(workoutTypeEnum.getIndex());
+            workoutTypeVOList.add(vo);
+        }
+        return workoutTypeVOList;
     }
 
     private void parseWorkoutName(List<StatisticsEachTypeVO> statisticsEachTypeVOList) {

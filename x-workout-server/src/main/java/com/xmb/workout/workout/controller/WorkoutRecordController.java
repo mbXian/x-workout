@@ -10,6 +10,7 @@ import com.xmb.common.network.Result;
 import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryDTO;
 import com.xmb.workout.workout.vo.ToNowStatisticsVO;
 import com.xmb.workout.workout.vo.TodayStatisticsVO;
+import com.xmb.workout.workout.vo.WorkoutTypeVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -78,6 +79,13 @@ public class WorkoutRecordController extends BaseController {
         SysUserEntity sysUserEntity = new SysUserEntity();
         sysUserEntity.setMobile("18824140606");
         return Result.ok(workoutRecordService.toNowStatistics(sysUserEntity));
+    }
+
+    @ApiOperation(value = "所有的锻炼项目",notes = "所有的锻炼项目",consumes = "application/json")
+    @PostMapping("/workoutTypeList")
+    public Result<List<WorkoutTypeVO>> workoutTypeList() {
+
+        return Result.ok(workoutRecordService.workoutTypeList());
     }
 
     @ApiOperation(value = "测试接口",notes = "测试接口",consumes = "application/json")
