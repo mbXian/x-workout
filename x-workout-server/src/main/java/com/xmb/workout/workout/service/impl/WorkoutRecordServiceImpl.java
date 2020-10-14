@@ -57,7 +57,7 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
         detailEntity1.setWorkoutNumber(workoutRecordEntity.getNumber());
         detailEntity1.setType(WorkoutTypeEnum.PUSH_UP.getIndex());
         detailEntity1.setSortNo(1);
-        detailEntity1.setCount(21);
+        detailEntity1.setCount(25);
         detailEntity1.setGroups(1);
         detailEntityList.add(detailEntity1);
 
@@ -73,7 +73,7 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
         detailEntity3.setWorkoutNumber(workoutRecordEntity.getNumber());
         detailEntity3.setType(WorkoutTypeEnum.PUSH_UP.getIndex());
         detailEntity3.setSortNo(3);
-        detailEntity3.setCount(21);
+        detailEntity3.setCount(25);
         detailEntity3.setGroups(1);
         detailEntityList.add(detailEntity3);
 
@@ -81,7 +81,7 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
         detailEntity4.setWorkoutNumber(workoutRecordEntity.getNumber());
         detailEntity4.setType(WorkoutTypeEnum.AIR_CYCLING.getIndex());
         detailEntity4.setSortNo(4);
-        detailEntity4.setCount(20);
+        detailEntity4.setCount(26);
         detailEntity4.setGroups(1);
         detailEntityList.add(detailEntity4);
 
@@ -97,7 +97,7 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
         detailEntity6.setWorkoutNumber(workoutRecordEntity.getNumber());
         detailEntity6.setType(WorkoutTypeEnum.ROPE_JUMPING.getIndex());
         detailEntity6.setSortNo(6);
-        detailEntity6.setCount(300);
+        detailEntity6.setCount(400);
         detailEntity6.setGroups(1);
         detailEntityList.add(detailEntity6);
 
