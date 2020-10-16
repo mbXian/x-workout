@@ -1,5 +1,6 @@
 package com.xmb.workout.workout.controller;
 
+import java.util.Date;
 import java.util.List;
 import com.xmb.auth.AuthCenterUserApiService;
 import com.xmb.auth.auth.dto.CheckoutPasswordDTO;
@@ -90,7 +91,7 @@ public class WorkoutRecordController extends BaseController {
     @ApiOperation(value = "测试接口",notes = "测试接口",consumes = "application/json")
     @PostMapping("/test")
     public Result test() {
-        log.info("dasdj");
+        log.info("时区时间 = " + (new Date(1602770382429L)));
         return Result.ok();
     }
 }
