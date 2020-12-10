@@ -23,6 +23,6 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("Swagger title").description("Swagger description").version("1.0").build();
+        return new ApiInfoBuilder().title("锻炼项目API").description("锻炼项目API文档").version("1.0").build();
     }
 }

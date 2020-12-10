@@ -21,26 +21,26 @@
 
     <select id="statisticsByTimeAndType" resultMap="StatisticsEachTypeResultMap">
         SELECT
-        wrd.type AS type,
-        sum( wrd.count ) AS countTotal
+            wrd.type AS type,
+            sum( wrd.count ) AS countTotal
         FROM
-        workout_record_detail wrd
+            workout_record_detail wrd
         LEFT JOIN workout_record wr ON (wr.number = wrd.workout_number AND wr.deleted = 0)
         WHERE
-        wrd.deleted = 0
-        <if test="dto.mobile != null and dto.mobile != ''">
-            AND wr.user_mobile = #{dto.mobile}
-        </if>
-        <if test="dto.type != null">
-            AND wrd.type = #{dro.type}
-        </if>
-        <if test="dto.startDate != null">
-            AND wr.train_time &gt;= #{dto.startDate}
-        </if>
-        <if test="dto.endDate != null">
-            AND wr.train_time &lt;= #{dto.endDate}
-        </if>
+            wrd.deleted = 0
+            <if test="dto.mobile != null and dto.mobile != ''">
+                AND wr.user_mobile = #{dto.mobile}
+            </if>
+            <if test="dto.type != null">
+                AND wrd.type = #{dro.type}
+            </if>
+            <if test="dto.startDate != null">
+                AND wr.train_time &gt;= #{dto.startDate}
+            </if>
+            <if test="dto.endDate != null">
+                AND wr.train_time &lt;= #{dto.endDate}
+            </if>
         GROUP BY
-        wrd.type
+            wrd.type
     </select>
 </mapper>

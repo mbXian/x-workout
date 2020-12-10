@@ -10,10 +10,7 @@ import com.xmb.common.network.PageUtils;
 import com.xmb.common.network.Result;
 import com.xmb.workout.workout.dto.WorkoutDaysSaturationDTO;
 import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryDTO;
-import com.xmb.workout.workout.vo.ToNowStatisticsVO;
-import com.xmb.workout.workout.vo.TodayStatisticsVO;
-import com.xmb.workout.workout.vo.WorkoutDaysSaturationVO;
-import com.xmb.workout.workout.vo.WorkoutTypeVO;
+import com.xmb.workout.workout.vo.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -99,6 +96,15 @@ public class WorkoutRecordController extends BaseController {
         SysUserEntity sysUserEntity = new SysUserEntity();
         sysUserEntity.setMobile("18824140606");
         return Result.ok(workoutRecordService.daysSaturation(sysUserEntity, workoutDaysSaturationDTO.getDays()));
+    }
+
+    @ApiOperation(value = "已连续锻炼天数",notes = "已连续锻炼天数",consumes = "application/json")
+    @PostMapping("/keepOnDays")
+    public Result<WorkoutKeepOnDaysVO> keepOnDays() {
+
+        SysUserEntity sysUserEntity = new SysUserEntity();
+        sysUserEntity.setMobile("18824140606");
+        return Result.ok(workoutRecordService.keepOnDays(sysUserEntity));
     }
 
     @ApiOperation(value = "测试接口",notes = "测试接口",consumes = "application/json")

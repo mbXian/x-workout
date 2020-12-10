@@ -25,6 +25,7 @@ import com.xmb.workout.workout.dao.WorkoutRecordDao;
 import com.xmb.workout.workout.entity.WorkoutRecordEntity;
 import com.xmb.workout.workout.service.WorkoutRecordService;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 @Slf4j
 @Service("workoutRecordService")
@@ -244,4 +245,50 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
 
         return vo;
     }
+
+    /**
+     * 已连续锻炼天数
+     * @param sysUserEntity
+     * @return
+     */
+    @Override
+    public WorkoutKeepOnDaysVO keepOnDays(SysUserEntity sysUserEntity) {
+        WorkoutKeepOnDaysVO vo = new WorkoutKeepOnDaysVO();
+        vo.setKeepOnDays(0);
+
+        Date currentDate = new Date();
+        LocalDateTime startLocalDateTime = DateUtils.convertFromDateToLocalDateTime(DateUtils.getDayStartTime(currentDate));
+        LocalDateTime endLocalDateTime = DateUtils.convertFromDateToLocalDateTime(DateUtils.getDayEndTime(currentDate));
+
+        List<Date> dateList = baseMapper.findTrainTime(sysUserEntity.getMobile());
+
+        if (!CollectionUtils.isEmpty(dateList)) {
+            Date trainTime = null;
+            LocalDateTime localDateTime = null;
+
+            trainTime = dateList.get(0);
+            localDateTime = DateUtils.convertFromDateToLocalDateTime(trainTime);
+            if (localDateTime.isAfter(startLocalDateTime) && localDateTime.isBefore(endLocalDateTime)) {
+                //今日已锻炼
+
+            } else {
+                //今日没锻炼
+                startLocalDateTime = startLocalDateTime.minusDays(1);
+                endLocalDateTime = endLocalDateTime.minusDays(1);
+            }
+            for (int i = 0; i < dateList.size(); i++) {
+                trainTime = dateList.get(i);
+                localDateTime = DateUtils.convertFromDateToLocalDateTime(trainTime);
+                LocalDateTime workoutDayStartLocalDateTime = startLocalDateTime.minusDays(i);
+                LocalDateTime workoutDayEndLocalDateTime = endLocalDateTime.minusDays(i);
+                if (localDateTime.isAfter(workoutDayStartLocalDateTime) && localDateTime.isBefore(workoutDayEndLocalDateTime)) {
+                    vo.setKeepOnDays(vo.getKeepOnDays() + 1);
+                } else {
+                    break;
+                }
+            }
+        }
+        return vo;
+    }
+
 }

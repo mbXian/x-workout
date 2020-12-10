@@ -4,10 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.xmb.auth.entity.SysUserEntity;
 import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryDTO;
 import com.xmb.workout.workout.entity.WorkoutRecordEntity;
-import com.xmb.workout.workout.vo.ToNowStatisticsVO;
-import com.xmb.workout.workout.vo.TodayStatisticsVO;
-import com.xmb.workout.workout.vo.WorkoutDaysSaturationVO;
-import com.xmb.workout.workout.vo.WorkoutTypeVO;
+import com.xmb.workout.workout.vo.*;
+
 import java.util.List;
 
 /**
@@ -52,6 +50,12 @@ public interface WorkoutRecordService extends IService<WorkoutRecordEntity> {
      */
     WorkoutDaysSaturationVO daysSaturation(SysUserEntity sysUserEntity, Integer days);
 
+    /**
+     * 已连续锻炼天数
+     * @param sysUserEntity
+     * @return
+     */
+    WorkoutKeepOnDaysVO keepOnDays(SysUserEntity sysUserEntity);
 
 }
 

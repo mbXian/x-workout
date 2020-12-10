@@ -26,4 +26,7 @@ public interface WorkoutRecordDao extends BaseMapper<WorkoutRecordEntity> {
     StatisticsDurationAndTimesVO statisticsDurationAndTimes(@Param("dto") StatisticsDurationAndTimesDTO statisticsDurationAndTimesDTO);
 
     Date findStartOrEndTrainTime(@Param("dto") QueryStartOrEndTimeDTO queryStartOrEndTimeDTO);
+
+    List<Date> findTrainTime(@Param("mobile") String mobile);
+
 }

@@ -24,47 +24,47 @@
 
     <select id="findAll" resultType="com.xmb.workout.workout.entity.WorkoutRecordEntity">
         SELECT
-        wr.*
+            wr.*
         FROM
-        workout_record wr
+            workout_record wr
         WHERE
-        wr.deleted = 0
-        <if test="dto.mobile != null and dto.mobile != ''">
-            AND wr.user_mobile = #{dto.mobile}
-        </if>
+            wr.deleted = 0
+            <if test="dto.mobile != null and dto.mobile != ''">
+                AND wr.user_mobile = #{dto.mobile}
+            </if>
     </select>
 
     <select id="statisticsDurationAndTimes" resultMap="StatisticsDurationAndTimesMap">
         SELECT
-        sum(
-        UNIX_TIMESTAMP( wr.finish_time ) - UNIX_TIMESTAMP( wr.train_time )
-        ) AS duration,
-        sum(1) AS times
+            sum(
+                UNIX_TIMESTAMP( wr.finish_time ) - UNIX_TIMESTAMP( wr.train_time )
+            ) AS duration,
+            sum(1) AS times
         FROM
-        workout_record wr
+            workout_record wr
         WHERE
-        wr.deleted = 0
-        <if test="dto.mobile != null and dto.mobile != ''">
-            AND wr.user_mobile = #{dto.mobile}
-        </if>
-        <if test="dto.startDate != null">
-            AND wr.train_time &gt;= #{dto.startDate}
-        </if>
-        <if test="dto.endDate != null">
-            AND wr.train_time &lt;= #{dto.endDate}
-        </if>
+            wr.deleted = 0
+            <if test="dto.mobile != null and dto.mobile != ''">
+                AND wr.user_mobile = #{dto.mobile}
+            </if>
+            <if test="dto.startDate != null">
+                AND wr.train_time &gt;= #{dto.startDate}
+            </if>
+            <if test="dto.endDate != null">
+                AND wr.train_time &lt;= #{dto.endDate}
+            </if>
     </select>
 
     <select id="findStartOrEndTrainTime" resultType="date">
         SELECT
-        wr.train_time
+            wr.train_time
         FROM
-        workout_record wr
+            workout_record wr
         WHERE
-        wr.deleted = 0
-        <if test="dto.mobile != null and dto.mobile != ''">
-            AND wr.user_mobile = #{dto.mobile}
-        </if>
+            wr.deleted = 0
+            <if test="dto.mobile != null and dto.mobile != ''">
+                AND wr.user_mobile = #{dto.mobile}
+            </if>
         <if test="dto.sortType != null and dto.sortType == 0">
             ORDER BY
             wr.id
@@ -75,4 +75,19 @@
         </if>
         LIMIT 1
     </select>
+
+    <select id="findTrainTime" resultType="date">
+        SELECT
+            train_time
+        FROM
+            workout_record
+        WHERE
+            deleted = 0
+            <if test="mobile != null and mobile != ''">
+                AND user_mobile = #{mobile}
+            </if>
+        ORDER BY
+            train_time DESC
+    </select>
+
 </mapper>
