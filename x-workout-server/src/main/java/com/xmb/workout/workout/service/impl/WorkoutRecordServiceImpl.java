@@ -234,12 +234,22 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
 
         WorkoutDaysSaturationVO vo = new WorkoutDaysSaturationVO();
 
-        Date todayStartTime = DateUtils.getDayStartTime(new Date());
+        Date currentDate = new Date();
+        Date todayStartTime = DateUtils.getDayStartTime(currentDate);
+        Date todayEndTime = DateUtils.getDayEndTime(currentDate);
+        List<WorkoutRecordEntity> list = list(Wrappers.<WorkoutRecordEntity>query().lambda().between(WorkoutRecordEntity::getTrainTime, todayStartTime, todayEndTime));
+
         LocalDateTime todayLocalDateTime = DateUtils.convertFromDateToLocalDateTime(todayStartTime);
-        LocalDateTime daysAgoLocalDateTime = todayLocalDateTime.minusDays(days);
+        LocalDateTime daysAgoLocalDateTime = null;
+        if (CollectionUtils.isEmpty(list)) {
+            daysAgoLocalDateTime = todayLocalDateTime.minusDays(days);
+        } else {
+            //今日有锻炼，往前算少一天
+            daysAgoLocalDateTime = todayLocalDateTime.minusDays(days - 1);
+        }
         Date daysAgoTime = DateUtils.convertFromLocalDateTimeToDate(daysAgoLocalDateTime);
 
-        List<WorkoutRecordEntity> recordEntityList = list(Wrappers.<WorkoutRecordEntity>query().lambda().between(WorkoutRecordEntity::getTrainTime, daysAgoTime, todayStartTime).eq(WorkoutRecordEntity::getDeleted, 0));
+        List<WorkoutRecordEntity> recordEntityList = list(Wrappers.<WorkoutRecordEntity>query().lambda().between(WorkoutRecordEntity::getTrainTime, daysAgoTime, todayEndTime).eq(WorkoutRecordEntity::getDeleted, 0));
 
         vo.setDaysSaturation((Math.round((recordEntityList.size() / (float)days) * 1000) / 1000.0));
 
