@@ -11,6 +11,7 @@ public enum WorkoutTypeEnum {
     BENT_KNEE_V_UP(4, "触腿两头起"),
     ROPE_JUMPING(5, "跳绳"),
     AIR_CYCLING(6, "空中踩单车"),
+    RUN(7, "跑步"),
     ;
 
     private Integer index;

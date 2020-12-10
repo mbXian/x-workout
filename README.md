@@ -1,5 +1,5 @@
-# x-springcloud-base
-分布式项目公共项目
+# x-workout
+分布式项目锻炼项目
 
 #### 部署步骤
 ##### 部署euraka模块
