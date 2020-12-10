@@ -1,6 +1,7 @@
 package com.xmb.workout.workout.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.xmb.auth.entity.SysUserEntity;
 import com.xmb.common.utils.DateUtils;
 import com.xmb.workout.utils.CodeGenerateUtils;
@@ -15,6 +16,7 @@ import com.xmb.workout.workout.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -219,5 +221,27 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
                 vo.setName(WorkoutTypeEnum.AIR_CYCLING.name());
             }
         }
+    }
+
+    /**
+     * 过期n天训练饱和率
+     * @param sysUserEntity
+     * @param days
+     */
+    @Override
+    public WorkoutDaysSaturationVO daysSaturation(SysUserEntity sysUserEntity, Integer days) {
+
+        WorkoutDaysSaturationVO vo = new WorkoutDaysSaturationVO();
+
+        Date todayStartTime = DateUtils.getDayStartTime(new Date());
+        LocalDateTime todayLocalDateTime = DateUtils.convertFromDateToLocalDateTime(todayStartTime);
+        LocalDateTime daysAgoLocalDateTime = todayLocalDateTime.minusDays(days);
+        Date daysAgoTime = DateUtils.convertFromLocalDateTimeToDate(daysAgoLocalDateTime);
+
+        List<WorkoutRecordEntity> recordEntityList = list(Wrappers.<WorkoutRecordEntity>query().lambda().between(WorkoutRecordEntity::getTrainTime, daysAgoTime, todayStartTime).eq(WorkoutRecordEntity::getDeleted, 0));
+
+        vo.setDaysSaturation((Math.round((recordEntityList.size() / (float)days) * 1000) / 1000.0));
+
+        return vo;
     }
 }

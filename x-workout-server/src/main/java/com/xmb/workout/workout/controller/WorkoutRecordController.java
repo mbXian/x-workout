@@ -8,9 +8,11 @@ import com.xmb.auth.controller.BaseController;
 import com.xmb.auth.entity.SysUserEntity;
 import com.xmb.common.network.PageUtils;
 import com.xmb.common.network.Result;
+import com.xmb.workout.workout.dto.WorkoutDaysSaturationDTO;
 import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryDTO;
 import com.xmb.workout.workout.vo.ToNowStatisticsVO;
 import com.xmb.workout.workout.vo.TodayStatisticsVO;
+import com.xmb.workout.workout.vo.WorkoutDaysSaturationVO;
 import com.xmb.workout.workout.vo.WorkoutTypeVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -86,6 +88,17 @@ public class WorkoutRecordController extends BaseController {
     public Result<List<WorkoutTypeVO>> workoutTypeList() {
 
         return Result.ok(workoutRecordService.workoutTypeList());
+    }
+
+    @ApiOperation(value = "过期n天训练饱和率",notes = "过期n天训练饱和率",consumes = "application/json")
+    @PostMapping("/daysSaturation")
+    public Result<WorkoutDaysSaturationVO> daysSaturation(@RequestBody @Validated WorkoutDaysSaturationDTO workoutDaysSaturationDTO) {
+        if (workoutDaysSaturationDTO.getDays() <= 0) {
+            return Result.fail("参数错误!");
+        }
+        SysUserEntity sysUserEntity = new SysUserEntity();
+        sysUserEntity.setMobile("18824140606");
+        return Result.ok(workoutRecordService.daysSaturation(sysUserEntity, workoutDaysSaturationDTO.getDays()));
     }
 
     @ApiOperation(value = "测试接口",notes = "测试接口",consumes = "application/json")

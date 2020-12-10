@@ -6,6 +6,7 @@ import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryDTO;
 import com.xmb.workout.workout.entity.WorkoutRecordEntity;
 import com.xmb.workout.workout.vo.ToNowStatisticsVO;
 import com.xmb.workout.workout.vo.TodayStatisticsVO;
+import com.xmb.workout.workout.vo.WorkoutDaysSaturationVO;
 import com.xmb.workout.workout.vo.WorkoutTypeVO;
 import java.util.List;
 
@@ -43,6 +44,14 @@ public interface WorkoutRecordService extends IService<WorkoutRecordEntity> {
      * @return
      */
     List<WorkoutTypeVO> workoutTypeList();
+
+    /**
+     * 过期n天训练饱和率
+     * @param sysUserEntity
+     * @param days
+     */
+    WorkoutDaysSaturationVO daysSaturation(SysUserEntity sysUserEntity, Integer days);
+
 
 }
 
