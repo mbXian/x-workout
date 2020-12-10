@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @desc
  */
 @Data
-public class WorkoutDaysSaturationDTO {
+public class WorkoutDaysSaturationDTO extends WorkoutRequestBaseDTO {
 
     @ApiModelProperty("过去n天")
     @NotNull(message = "参数错误!")

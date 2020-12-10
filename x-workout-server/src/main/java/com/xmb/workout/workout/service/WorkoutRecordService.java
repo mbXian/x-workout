@@ -2,7 +2,7 @@ package com.xmb.workout.workout.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xmb.auth.entity.SysUserEntity;
-import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryDTO;
+import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryBaseDTO;
 import com.xmb.workout.workout.entity.WorkoutRecordEntity;
 import com.xmb.workout.workout.vo.*;
 
@@ -21,7 +21,7 @@ public interface WorkoutRecordService extends IService<WorkoutRecordEntity> {
      * 临时登记
      *
      */
-    Boolean enterDailyDataTemporary(WorkoutRecordEnterDailyTemporaryDTO workoutRecordEnterDailyTemporaryDTO, SysUserEntity sysUserEntity) throws Exception;
+    Boolean enterDailyDataTemporary(WorkoutRecordEnterDailyTemporaryBaseDTO workoutRecordEnterDailyTemporaryDTO, SysUserEntity sysUserEntity) throws Exception;
 
     /**
      * 今日数据统计

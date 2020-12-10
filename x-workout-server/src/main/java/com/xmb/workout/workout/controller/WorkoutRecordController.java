@@ -8,8 +8,9 @@ import com.xmb.auth.controller.BaseController;
 import com.xmb.auth.entity.SysUserEntity;
 import com.xmb.common.network.PageUtils;
 import com.xmb.common.network.Result;
+import com.xmb.workout.workout.dto.WorkoutRequestBaseDTO;
 import com.xmb.workout.workout.dto.WorkoutDaysSaturationDTO;
-import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryDTO;
+import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryBaseDTO;
 import com.xmb.workout.workout.vo.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,11 +43,11 @@ public class WorkoutRecordController extends BaseController {
      */
     @ApiOperation(("训练记录列表"))
     @PostMapping("/list")
-    public Result list(){
+    public Result list(@RequestBody @Validated WorkoutRequestBaseDTO workoutRequestBaseDTO){
         List<WorkoutRecordEntity> list = workoutRecordService.list();
 
         CheckoutPasswordDTO dto = new CheckoutPasswordDTO();
-        dto.setMobile("18824140606");
+        dto.setMobile(workoutRequestBaseDTO.getUserMobile());
         dto.setPassword("123456");
         boolean b = authCenterUserApiService.checkUserMobilePassword(dto);
 
@@ -55,28 +56,28 @@ public class WorkoutRecordController extends BaseController {
 
     @ApiOperation(value = "临时登记",notes = "临时登记",consumes = "application/json")
     @PostMapping("/enterDailyDataTemporary")
-    public Result<Boolean> enterDailyDataTemporary(@RequestBody @Validated WorkoutRecordEnterDailyTemporaryDTO workoutRecordEnterDailyTemporaryDTO) throws Exception {
+    public Result<Boolean> enterDailyDataTemporary(@RequestBody @Validated WorkoutRecordEnterDailyTemporaryBaseDTO workoutRecordEnterDailyTemporaryDTO) throws Exception {
 
         SysUserEntity sysUserEntity = new SysUserEntity();
-        sysUserEntity.setMobile("18824140606");
+        sysUserEntity.setMobile(workoutRecordEnterDailyTemporaryDTO.getUserMobile());
         return Result.ok(workoutRecordService.enterDailyDataTemporary(workoutRecordEnterDailyTemporaryDTO, sysUserEntity));
     }
 
     @ApiOperation(value = "统计今日锻炼数据",notes = "统计今日锻炼数据",consumes = "application/json")
     @PostMapping("/todayStatistics")
-    public Result<TodayStatisticsVO> todayStatistics() {
+    public Result<TodayStatisticsVO> todayStatistics(@RequestBody @Validated WorkoutRequestBaseDTO workoutRequestBaseDTO) {
 
         SysUserEntity sysUserEntity = new SysUserEntity();
-        sysUserEntity.setMobile("18824140606");
+        sysUserEntity.setMobile(workoutRequestBaseDTO.getUserMobile());
         return Result.ok(workoutRecordService.todayStatistics(sysUserEntity));
     }
 
     @ApiOperation(value = "统计至今锻炼数据",notes = "统计至今锻炼数据",consumes = "application/json")
     @PostMapping("/toNowStatistics")
-    public Result<ToNowStatisticsVO> toNowStatistics() {
+    public Result<ToNowStatisticsVO> toNowStatistics(@RequestBody @Validated WorkoutRequestBaseDTO workoutRequestBaseDTO) {
 
         SysUserEntity sysUserEntity = new SysUserEntity();
-        sysUserEntity.setMobile("18824140606");
+        sysUserEntity.setMobile(workoutRequestBaseDTO.getUserMobile());
         return Result.ok(workoutRecordService.toNowStatistics(sysUserEntity));
     }
 
@@ -94,16 +95,16 @@ public class WorkoutRecordController extends BaseController {
             return Result.fail("参数错误!");
         }
         SysUserEntity sysUserEntity = new SysUserEntity();
-        sysUserEntity.setMobile("18824140606");
+        sysUserEntity.setMobile(workoutDaysSaturationDTO.getUserMobile());
         return Result.ok(workoutRecordService.daysSaturation(sysUserEntity, workoutDaysSaturationDTO.getDays()));
     }
 
     @ApiOperation(value = "已连续锻炼天数",notes = "已连续锻炼天数",consumes = "application/json")
     @PostMapping("/keepOnDays")
-    public Result<WorkoutKeepOnDaysVO> keepOnDays() {
+    public Result<WorkoutKeepOnDaysVO> keepOnDays(@RequestBody @Validated WorkoutRequestBaseDTO workoutRequestBaseDTO) {
 
         SysUserEntity sysUserEntity = new SysUserEntity();
-        sysUserEntity.setMobile("18824140606");
+        sysUserEntity.setMobile(workoutRequestBaseDTO.getUserMobile());
         return Result.ok(workoutRecordService.keepOnDays(sysUserEntity));
     }
 

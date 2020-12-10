@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  */
 @ApiModel("临时登记参数DTO")
 @Data
-public class WorkoutRecordEnterDailyTemporaryDTO {
+public class WorkoutRecordEnterDailyTemporaryBaseDTO extends WorkoutRequestBaseDTO {
 
     @ApiModelProperty("密码")
     @NotNull(message = "密码不能为空")
@@ -26,13 +26,9 @@ public class WorkoutRecordEnterDailyTemporaryDTO {
     @NotNull(message = "结束训练时间不能为空")
     private Long finishTimeMilliSec;
 
-    /**
-     * 经度
-     */
+    @ApiModelProperty("经度")
     private BigDecimal latitude;
 
-    /**
-     * 纬度
-     */
+    @ApiModelProperty("纬度")
     private BigDecimal longitude;
 }

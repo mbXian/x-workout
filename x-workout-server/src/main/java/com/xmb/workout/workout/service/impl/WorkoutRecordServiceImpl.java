@@ -9,7 +9,7 @@ import com.xmb.workout.workout.constant.WorkoutTypeEnum;
 import com.xmb.workout.workout.dto.QueryStartOrEndTimeDTO;
 import com.xmb.workout.workout.dto.StatisticsDurationAndTimesDTO;
 import com.xmb.workout.workout.dto.StatisticsEachTypeDTO;
-import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryDTO;
+import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryBaseDTO;
 import com.xmb.workout.workout.entity.WorkoutRecordDetailEntity;
 import com.xmb.workout.workout.service.WorkoutRecordDetailService;
 import com.xmb.workout.workout.vo.*;
@@ -40,7 +40,7 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Boolean enterDailyDataTemporary(WorkoutRecordEnterDailyTemporaryDTO workoutRecordEnterDailyTemporaryDTO, SysUserEntity sysUserEntity) throws Exception {
+    public Boolean enterDailyDataTemporary(WorkoutRecordEnterDailyTemporaryBaseDTO workoutRecordEnterDailyTemporaryDTO, SysUserEntity sysUserEntity) throws Exception {
         log.info("参数 = {}", JSON.toJSONString(workoutRecordEnterDailyTemporaryDTO));
         if (!"4444".equals(workoutRecordEnterDailyTemporaryDTO.getPassword())) {
             throw new Exception("密码错误!");
