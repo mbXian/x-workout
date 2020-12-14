@@ -251,7 +251,14 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
 
         List<WorkoutRecordEntity> recordEntityList = list(Wrappers.<WorkoutRecordEntity>query().lambda().between(WorkoutRecordEntity::getTrainTime, daysAgoTime, todayEndTime).eq(WorkoutRecordEntity::getDeleted, 0));
 
-        vo.setDaysSaturation((Math.round((recordEntityList.size() / (float)days) * 1000) / 1000.0));
+        List<String> dateStringList = new ArrayList<>();
+        for (WorkoutRecordEntity workoutRecordEntity : recordEntityList) {
+            String format = DateUtils.format(workoutRecordEntity.getTrainTime(), DateUtils.DATE_PATTERN);
+            if (!dateStringList.contains(format)) {
+                dateStringList.add(format);
+            }
+        }
+        vo.setDaysSaturation((Math.round((dateStringList.size() / (float)days) * 1000) / 1000.0));
 
         return vo;
     }
@@ -286,16 +293,21 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
                 startLocalDateTime = startLocalDateTime.minusDays(1);
                 endLocalDateTime = endLocalDateTime.minusDays(1);
             }
+            LocalDateTime lastLocalDateTime = null;
             for (int i = 0; i < dateList.size(); i++) {
                 trainTime = dateList.get(i);
                 localDateTime = DateUtils.convertFromDateToLocalDateTime(trainTime);
                 LocalDateTime workoutDayStartLocalDateTime = startLocalDateTime.minusDays(i);
                 LocalDateTime workoutDayEndLocalDateTime = endLocalDateTime.minusDays(i);
+                if (lastLocalDateTime != null && lastLocalDateTime.getDayOfMonth() == localDateTime.getDayOfMonth()) {
+                    continue;
+                }
                 if (localDateTime.isAfter(workoutDayStartLocalDateTime) && localDateTime.isBefore(workoutDayEndLocalDateTime)) {
                     vo.setKeepOnDays(vo.getKeepOnDays() + 1);
                 } else {
                     break;
                 }
+                lastLocalDateTime = localDateTime;
             }
         }
         return vo;
