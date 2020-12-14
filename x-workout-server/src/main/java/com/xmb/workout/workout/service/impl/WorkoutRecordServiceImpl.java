@@ -237,7 +237,7 @@ public class WorkoutRecordServiceImpl extends ServiceImpl<WorkoutRecordDao, Work
         Date currentDate = new Date();
         Date todayStartTime = DateUtils.getDayStartTime(currentDate);
         Date todayEndTime = DateUtils.getDayEndTime(currentDate);
-        List<WorkoutRecordEntity> list = list(Wrappers.<WorkoutRecordEntity>query().lambda().between(WorkoutRecordEntity::getTrainTime, todayStartTime, todayEndTime));
+        List<WorkoutRecordEntity> list = list(Wrappers.<WorkoutRecordEntity>query().lambda().between(WorkoutRecordEntity::getTrainTime, todayStartTime, todayEndTime).eq(WorkoutRecordEntity::getDeleted, 0));
 
         LocalDateTime todayLocalDateTime = DateUtils.convertFromDateToLocalDateTime(todayStartTime);
         LocalDateTime daysAgoLocalDateTime = null;
