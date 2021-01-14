@@ -64,12 +64,12 @@ public class WeatherRealTimeDataVO {
                 throw new Exception("xml数据不包含根元素！");
             } else {
                 List<Element> rElementList = dsElement.elements();
-                if (CollectionUtils.isEmpty(rElementList) || rElementList.size() < 2) {
+                if (CollectionUtils.isEmpty(rElementList) || rElementList.size() != 2) {
                     throw new Exception("DS元素下包含子元素数量不对！");
                 } else {
                     Element r2Element = rElementList.get(1);
                     List<Element> cEmentList = r2Element.elements();
-                    if (cEmentList == null || cEmentList.size() < 9) {
+                    if (cEmentList == null || cEmentList.size() != 9) {
                         throw new Exception("R元素下包含子元素数量不对！");
                     } else {
                         if (cEmentList.get(0).getData() != null) {

@@ -1,5 +1,6 @@
 package com.xmb.workout.lifestyle.service;
 
+import com.xmb.workout.lifestyle.DayForecastVO;
 import com.xmb.workout.lifestyle.WeatherRealTimeDataVO;
 
 /**
@@ -15,5 +16,12 @@ public interface KongMoonWeatherService {
      * @return
      */
     WeatherRealTimeDataVO getRealTimeData() throws Exception;
+
+    /**
+     * 今天天气预报
+     *
+     * @return
+     */
+    DayForecastVO getDayForecast() throws Exception;
 
 }

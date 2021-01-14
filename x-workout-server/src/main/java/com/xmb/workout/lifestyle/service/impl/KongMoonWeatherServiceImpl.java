@@ -1,6 +1,7 @@
 package com.xmb.workout.lifestyle.service.impl;
 
 import com.xmb.workout.constant.KongMoonWeatherNetWorkConstant;
+import com.xmb.workout.lifestyle.DayForecastVO;
 import com.xmb.workout.lifestyle.WeatherRealTimeDataVO;
 import com.xmb.workout.lifestyle.service.KongMoonWeatherService;
 import com.xmb.workout.utils.network.CommonOkHttpClient;
@@ -25,15 +26,25 @@ public class KongMoonWeatherServiceImpl implements KongMoonWeatherService {
     public WeatherRealTimeDataVO getRealTimeData() throws Exception {
 
         String url = KongMoonWeatherNetWorkConstant.KONGMOON_ATMOSPHERE_PLATFORM_IP + KongMoonWeatherNetWorkConstant.REAL_TIME_WEATHER_DATA_URL;
+        Response response = CommonOkHttpClient.sendRequest(CommonOkhttpRequest.createGetRequest(url, null));
+        String respXmlString = response.body().string();
+        WeatherRealTimeDataVO vo = WeatherRealTimeDataVO.parseXmlRespStringToVO(respXmlString);
+        return vo;
+    }
 
-        try {
-            Response response = CommonOkHttpClient.sendRequest(CommonOkhttpRequest.createGetRequest(url, null));
-            String respXmlString = response.body().string();
-            WeatherRealTimeDataVO vo = WeatherRealTimeDataVO.parseXmlRespStringToVO(respXmlString);
-            return vo;
-        } catch (Exception e) {
-            throw new Exception("接口请求失败！");
-        }
+    /**
+     * 今天天气预报
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public DayForecastVO getDayForecast() throws Exception {
+
+        String url = KongMoonWeatherNetWorkConstant.KONGMOON_ATMOSPHERE_PLATFORM_IP + KongMoonWeatherNetWorkConstant.DAY_FORECAST_URL;
+        Response response = CommonOkHttpClient.sendRequest(CommonOkhttpRequest.createGetRequest(url, null));
+        String respXmlString = response.body().string();
+        DayForecastVO vo = DayForecastVO.parseXmlRespStringToVO(respXmlString);
+        return vo;
     }
 
 }

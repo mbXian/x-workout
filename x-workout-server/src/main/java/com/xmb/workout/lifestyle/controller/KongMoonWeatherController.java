@@ -2,6 +2,7 @@ package com.xmb.workout.lifestyle.controller;
 
 import com.xmb.auth.controller.BaseController;
 import com.xmb.common.network.Result;
+import com.xmb.workout.lifestyle.DayForecastVO;
 import com.xmb.workout.lifestyle.WeatherRealTimeDataVO;
 import com.xmb.workout.lifestyle.service.KongMoonWeatherService;
 import io.swagger.annotations.Api;
@@ -28,6 +29,12 @@ public class KongMoonWeatherController extends BaseController {
     @PostMapping(value = "/getRealTimeData", produces = "application/json; charset=UTF-8")
     public Result<WeatherRealTimeDataVO> getRealTimeData() throws Exception {
         return Result.ok(kongMoonWeatherService.getRealTimeData());
+    }
+
+    @ApiOperation(value = "今天天气预报", notes = "今天天气预报",consumes = "application/json")
+    @PostMapping(value = "/getDayForecast", produces = "application/json; charset=UTF-8")
+    public Result<DayForecastVO> getDayForecast() throws Exception {
+        return Result.ok(kongMoonWeatherService.getDayForecast());
     }
 
 }
