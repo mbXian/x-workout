@@ -31,7 +31,7 @@ public class WeatherRealTimeDataVO {
     private String windDirectionImage;
 
     @ApiModelProperty(value = "风速")
-    private BigDecimal windSpeed;
+    private String windSpeed;
 
     @ApiModelProperty(value = "风力")
     private String windPower;
