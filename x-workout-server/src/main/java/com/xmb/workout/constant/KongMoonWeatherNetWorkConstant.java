@@ -11,4 +11,6 @@ public class KongMoonWeatherNetWorkConstant {
     public static final String KONGMOON_ATMOSPHERE_PLATFORM_IP = "http://jmqx.jiangmen.cn";
     //实时天气数据url
     public static final String REAL_TIME_WEATHER_DATA_URL = "/material/upload/WeatherFiles/Weather_Data.xml";
+    //今天天气预报
+    public static final String DAY_FORECAST_URL = "/material/upload/WeatherFiles/jmdayfoca.xml";
 }
