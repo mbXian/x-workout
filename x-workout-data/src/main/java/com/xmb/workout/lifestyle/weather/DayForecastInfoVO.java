@@ -1,10 +1,8 @@
-package com.xmb.workout.lifestyle;
+package com.xmb.workout.lifestyle.weather;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 import java.util.List;

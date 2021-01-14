@@ -1,9 +1,10 @@
 package com.xmb.workout.lifestyle.service.impl;
 
 import com.xmb.workout.constant.KongMoonWeatherNetWorkConstant;
-import com.xmb.workout.lifestyle.DayForecastVO;
-import com.xmb.workout.lifestyle.WeatherRealTimeDataVO;
+import com.xmb.workout.lifestyle.weather.DayForecastVO;
+import com.xmb.workout.lifestyle.weather.WeatherRealTimeDataVO;
 import com.xmb.workout.lifestyle.service.KongMoonWeatherService;
+import com.xmb.workout.lifestyle.weather.WeekForecastVO;
 import com.xmb.workout.utils.network.CommonOkHttpClient;
 import com.xmb.workout.utils.network.CommonOkhttpRequest;
 import okhttp3.Response;
@@ -44,6 +45,20 @@ public class KongMoonWeatherServiceImpl implements KongMoonWeatherService {
         Response response = CommonOkHttpClient.sendRequest(CommonOkhttpRequest.createGetRequest(url, null));
         String respXmlString = response.body().string();
         DayForecastVO vo = DayForecastVO.parseXmlRespStringToVO(respXmlString);
+        return vo;
+    }
+
+    /**
+     * 一周天气预报
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public WeekForecastVO getWeekForecast() throws Exception {
+        String url = KongMoonWeatherNetWorkConstant.KONGMOON_ATMOSPHERE_PLATFORM_IP + KongMoonWeatherNetWorkConstant.WEEK_FORECAST_URL;
+        Response response = CommonOkHttpClient.sendRequest(CommonOkhttpRequest.createGetRequest(url, null));
+        String respXmlString = response.body().string();
+        WeekForecastVO vo = WeekForecastVO.parseXmlRespStringToVO(respXmlString);
         return vo;
     }
 

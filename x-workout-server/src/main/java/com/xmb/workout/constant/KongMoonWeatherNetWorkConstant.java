@@ -13,4 +13,7 @@ public class KongMoonWeatherNetWorkConstant {
     public static final String REAL_TIME_WEATHER_DATA_URL = "/material/upload/WeatherFiles/Weather_Data.xml";
     //今天天气预报
     public static final String DAY_FORECAST_URL = "/material/upload/WeatherFiles/jmdayfoca.xml";
+    //一周天气预报
+    public static final String WEEK_FORECAST_URL = "/material/upload/WeatherFiles/dl_weekfoca.xml";
+
 }

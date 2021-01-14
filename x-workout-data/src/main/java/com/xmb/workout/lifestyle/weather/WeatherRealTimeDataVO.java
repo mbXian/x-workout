@@ -1,4 +1,4 @@
-package com.xmb.workout.lifestyle;
+package com.xmb.workout.lifestyle.weather;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
