@@ -25,16 +25,16 @@ public class DayForecastIndexVO {
     @ApiModelProperty(value = "城市火警")
     private String cityFire;
 
-    @ApiModelProperty(value = "日晒指数")
+    @ApiModelProperty(value = "晾晒指数")
     private String sunCure;
 
-    @ApiModelProperty(value = "发霉指数")
+    @ApiModelProperty(value = "霉变指数")
     private String mildew;
 
     @ApiModelProperty(value = "晨运指数")
     private String morningExercise;
 
-    @ApiModelProperty(value = "森林火灾")
+    @ApiModelProperty(value = "森林火灾指数")
     private String forestFire;
 
     @ApiModelProperty(value = "穿衣指数")
