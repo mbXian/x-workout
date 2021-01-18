@@ -8,6 +8,7 @@ import com.xmb.auth.controller.BaseController;
 import com.xmb.auth.entity.SysUserEntity;
 import com.xmb.common.network.PageUtils;
 import com.xmb.common.network.Result;
+import com.xmb.workout.annotation.ApiLog;
 import com.xmb.workout.workout.dto.WorkoutRequestBaseDTO;
 import com.xmb.workout.workout.dto.WorkoutDaysSaturationDTO;
 import com.xmb.workout.workout.dto.WorkoutRecordEnterDailyTemporaryBaseDTO;
@@ -72,6 +73,7 @@ public class WorkoutRecordController extends BaseController {
         return Result.ok(workoutRecordService.todayStatistics(sysUserEntity));
     }
 
+    @ApiLog(value = "测试日志")
     @ApiOperation(value = "统计至今锻炼数据",notes = "统计至今锻炼数据",consumes = "application/json")
     @PostMapping("/toNowStatistics")
     public Result<ToNowStatisticsVO> toNowStatistics(@RequestBody @Validated WorkoutRequestBaseDTO workoutRequestBaseDTO) {
