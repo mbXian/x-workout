@@ -31,7 +31,7 @@ public class MealController extends BaseController {
     @ApiLog(title = "获取推荐餐饮")
     @ApiOperation(value = "获取推荐餐饮",notes = "获取推荐餐饮",consumes = "application/json")
     @RequestMapping(value = "/recommend", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
-    public Result recommend(@RequestParam(value = "id") String id, @RequestParam(value = "id1") String id1) {
+    public Result recommend() {
         RecommendMealDTO recommendMealDTO = mealService.getRecommendMeal();
         return Result.ok(recommendMealDTO);
     }
