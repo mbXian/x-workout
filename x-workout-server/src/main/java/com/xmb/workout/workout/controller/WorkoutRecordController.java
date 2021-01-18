@@ -39,9 +39,7 @@ public class WorkoutRecordController extends BaseController {
     @Autowired
     private AuthCenterUserApiService authCenterUserApiService;
 
-    /**
-     * 列表
-     */
+    @ApiLog(title = "训练记录列表")
     @ApiOperation(("训练记录列表"))
     @PostMapping("/list")
     public Result list(@RequestBody @Validated WorkoutRequestBaseDTO workoutRequestBaseDTO){
@@ -55,6 +53,7 @@ public class WorkoutRecordController extends BaseController {
         return Result.ok(new PageUtils(list, list.size(), 10, 1));
     }
 
+    @ApiLog(title = "临时登记")
     @ApiOperation(value = "临时登记",notes = "临时登记",consumes = "application/json")
     @PostMapping("/enterDailyDataTemporary")
     public Result<Boolean> enterDailyDataTemporary(@RequestBody @Validated WorkoutRecordEnterDailyTemporaryBaseDTO workoutRecordEnterDailyTemporaryDTO) throws Exception {
@@ -64,6 +63,7 @@ public class WorkoutRecordController extends BaseController {
         return Result.ok(workoutRecordService.enterDailyDataTemporary(workoutRecordEnterDailyTemporaryDTO, sysUserEntity));
     }
 
+    @ApiLog(title = "统计今日锻炼数据")
     @ApiOperation(value = "统计今日锻炼数据",notes = "统计今日锻炼数据",consumes = "application/json")
     @PostMapping("/todayStatistics")
     public Result<TodayStatisticsVO> todayStatistics(@RequestBody @Validated WorkoutRequestBaseDTO workoutRequestBaseDTO) {
@@ -83,6 +83,7 @@ public class WorkoutRecordController extends BaseController {
         return Result.ok(workoutRecordService.toNowStatistics(sysUserEntity));
     }
 
+    @ApiLog(title = "所有的锻炼项目")
     @ApiOperation(value = "所有的锻炼项目",notes = "所有的锻炼项目",consumes = "application/json")
     @PostMapping("/workoutTypeList")
     public Result<List<WorkoutTypeVO>> workoutTypeList() {
@@ -90,7 +91,8 @@ public class WorkoutRecordController extends BaseController {
         return Result.ok(workoutRecordService.workoutTypeList());
     }
 
-    @ApiOperation(value = "过期n天训练饱和率",notes = "过期n天训练饱和率",consumes = "application/json")
+    @ApiLog(title = "过去n天训练饱和率")
+    @ApiOperation(value = "过去n天训练饱和率",notes = "过去n天训练饱和率",consumes = "application/json")
     @PostMapping("/daysSaturation")
     public Result<WorkoutDaysSaturationVO> daysSaturation(@RequestBody @Validated WorkoutDaysSaturationDTO workoutDaysSaturationDTO) {
         if (workoutDaysSaturationDTO.getDays() <= 0) {
@@ -101,6 +103,7 @@ public class WorkoutRecordController extends BaseController {
         return Result.ok(workoutRecordService.daysSaturation(sysUserEntity, workoutDaysSaturationDTO.getDays()));
     }
 
+    @ApiLog(title = "已连续锻炼天数")
     @ApiOperation(value = "已连续锻炼天数",notes = "已连续锻炼天数",consumes = "application/json")
     @PostMapping("/keepOnDays")
     public Result<WorkoutKeepOnDaysVO> keepOnDays(@RequestBody @Validated WorkoutRequestBaseDTO workoutRequestBaseDTO) {
@@ -110,6 +113,7 @@ public class WorkoutRecordController extends BaseController {
         return Result.ok(workoutRecordService.keepOnDays(sysUserEntity));
     }
 
+    @ApiLog(title = "测试接口")
     @ApiOperation(value = "测试接口",notes = "测试接口",consumes = "application/json")
     @PostMapping("/test")
     public Result test() {

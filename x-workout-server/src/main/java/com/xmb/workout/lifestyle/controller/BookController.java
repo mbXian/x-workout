@@ -2,6 +2,7 @@ package com.xmb.workout.lifestyle.controller;
 
 import com.xmb.auth.controller.BaseController;
 import com.xmb.common.network.Result;
+import com.xmb.workout.annotation.ApiLog;
 import com.xmb.workout.lifestyle.BookContentDTO;
 import com.xmb.workout.lifestyle.service.BookService;
 import io.swagger.annotations.Api;
@@ -25,6 +26,7 @@ public class BookController extends BaseController {
     @Autowired
     private BookService bookService;
 
+    @ApiLog(title = "章节总数")
     @ApiOperation(value = "章节总数",notes = "章节总数",consumes = "application/json")
     @PostMapping("/getTotalChapter")
     public Result getTotalChapter() {
@@ -32,6 +34,7 @@ public class BookController extends BaseController {
         return Result.ok(bookService.getTotalChapter());
     }
 
+    @ApiLog(title = "书本信息")
     @ApiOperation(value = "书本信息",notes = "书本信息",consumes = "application/json")
     @PostMapping("/getBookInfo")
     public Result getBookInfo() {
@@ -39,6 +42,7 @@ public class BookController extends BaseController {
         return Result.ok(bookService.getBookInfo());
     }
 
+    @ApiLog(title = "读取章节内容")
     @ApiOperation(value = "读取章节内容",notes = "读取章节内容",consumes = "application/json")
     @PostMapping("/getContent")
     public Result getContent(@RequestBody BookContentDTO bookContentDTO) {
