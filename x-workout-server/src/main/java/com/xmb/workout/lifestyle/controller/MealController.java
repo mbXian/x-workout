@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * Author by Ben
@@ -29,7 +28,7 @@ public class MealController extends BaseController {
     @Autowired
     MealService mealService;
 
-    @ApiLog(value = "获取推荐餐饮日志")
+    @ApiLog(title = "获取推荐餐饮")
     @ApiOperation(value = "获取推荐餐饮",notes = "获取推荐餐饮",consumes = "application/json")
     @RequestMapping(value = "/recommend", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
     public Result recommend(@RequestParam(value = "id") String id, @RequestParam(value = "id1") String id1) {

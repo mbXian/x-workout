@@ -13,9 +13,9 @@ import java.lang.annotation.*;
 public @interface ApiLog {
 
     /**
-     * 日志描述
+     * 日志标题
      * @return
      */
-    String value() default "无日志描述";
+    String title() default "无日志标题";
 
 }

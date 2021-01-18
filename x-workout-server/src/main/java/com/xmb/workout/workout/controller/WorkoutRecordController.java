@@ -73,7 +73,7 @@ public class WorkoutRecordController extends BaseController {
         return Result.ok(workoutRecordService.todayStatistics(sysUserEntity));
     }
 
-    @ApiLog(value = "测试日志")
+    @ApiLog(title = "统计至今锻炼数据")
     @ApiOperation(value = "统计至今锻炼数据",notes = "统计至今锻炼数据",consumes = "application/json")
     @PostMapping("/toNowStatistics")
     public Result<ToNowStatisticsVO> toNowStatistics(@RequestBody @Validated WorkoutRequestBaseDTO workoutRequestBaseDTO) {
