@@ -35,7 +35,7 @@ public class ApiLogAspect {
     private String profilesActive;
 
     @Around(value = "@annotation(apiLog)")
-    public void around(ProceedingJoinPoint point, ApiLog apiLog) throws Throwable {
+    public Object around(ProceedingJoinPoint point, ApiLog apiLog) throws Throwable {
 
         //服务器信息
         InetAddress address = InetAddress.getLocalHost();
@@ -106,6 +106,8 @@ public class ApiLogAspect {
         apiLogEntity.setStartTime(startTime);
         apiLogEntity.setEndTime(endTime);
         apiLogService.save(apiLogEntity);
+
+        return result;
     }
 
 }
