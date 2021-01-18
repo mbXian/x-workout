@@ -2,7 +2,10 @@ package com.xmb.workout.lifestyle.service;
 
 import com.xmb.workout.lifestyle.weather.DayForecastVO;
 import com.xmb.workout.lifestyle.weather.WeatherRealTimeDataVO;
+import com.xmb.workout.lifestyle.weather.WeatherWarningSignalVO;
 import com.xmb.workout.lifestyle.weather.WeekForecastVO;
+
+import java.util.List;
 
 /**
  * @author Ben
@@ -19,17 +22,24 @@ public interface KongMoonWeatherService {
     WeatherRealTimeDataVO getRealTimeData() throws Exception;
 
     /**
-     * 今天天气预报
+     * 未来24小时天气预报
      *
      * @return
      */
     DayForecastVO getDayForecast() throws Exception;
 
     /**
-     * 一周天气预报
+     * 未来一周天气预报
      * @return
      * @throws Exception
      */
     WeekForecastVO getWeekForecast() throws Exception;
+
+    /**
+     * 预警信号
+     * @return
+     * @throws Exception
+     */
+    List<WeatherWarningSignalVO> getWarningSignal() throws Exception;
 
 }

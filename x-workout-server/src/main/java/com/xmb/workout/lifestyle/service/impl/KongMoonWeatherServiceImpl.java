@@ -4,11 +4,14 @@ import com.xmb.workout.constant.KongMoonWeatherNetWorkConstant;
 import com.xmb.workout.lifestyle.weather.DayForecastVO;
 import com.xmb.workout.lifestyle.weather.WeatherRealTimeDataVO;
 import com.xmb.workout.lifestyle.service.KongMoonWeatherService;
+import com.xmb.workout.lifestyle.weather.WeatherWarningSignalVO;
 import com.xmb.workout.lifestyle.weather.WeekForecastVO;
 import com.xmb.workout.utils.network.CommonOkHttpClient;
 import com.xmb.workout.utils.network.CommonOkhttpRequest;
 import okhttp3.Response;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author Ben
@@ -34,7 +37,7 @@ public class KongMoonWeatherServiceImpl implements KongMoonWeatherService {
     }
 
     /**
-     * 今天天气预报
+     * 未来24小时天气预报
      * @return
      * @throws Exception
      */
@@ -49,7 +52,7 @@ public class KongMoonWeatherServiceImpl implements KongMoonWeatherService {
     }
 
     /**
-     * 一周天气预报
+     * 未来一周天气预报
      * @return
      * @throws Exception
      */
@@ -62,4 +65,17 @@ public class KongMoonWeatherServiceImpl implements KongMoonWeatherService {
         return vo;
     }
 
+    /**
+     * 预警信号
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<WeatherWarningSignalVO> getWarningSignal() throws Exception {
+        String url = KongMoonWeatherNetWorkConstant.KONGMOON_ATMOSPHERE_PLATFORM_IP + KongMoonWeatherNetWorkConstant.WARNING_SIGNAL_URL;
+        Response response = CommonOkHttpClient.sendRequest(CommonOkhttpRequest.createGetRequest(url, null));
+        String respXmlString = response.body().string();
+        List<WeatherWarningSignalVO> voList = WeatherWarningSignalVO.parseXmlRespStringToVO(respXmlString);
+        return voList;
+    }
 }

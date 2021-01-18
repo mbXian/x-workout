@@ -6,6 +6,7 @@ import com.xmb.workout.annotation.ApiLog;
 import com.xmb.workout.lifestyle.weather.DayForecastVO;
 import com.xmb.workout.lifestyle.weather.WeatherRealTimeDataVO;
 import com.xmb.workout.lifestyle.service.KongMoonWeatherService;
+import com.xmb.workout.lifestyle.weather.WeatherWarningSignalVO;
 import com.xmb.workout.lifestyle.weather.WeekForecastVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author Ben
@@ -46,6 +49,13 @@ public class KongMoonWeatherController extends BaseController {
     @PostMapping(value = "/getWeekForecast", produces = "application/json; charset=UTF-8")
     public Result<WeekForecastVO> getWeekForecast() throws Exception {
         return Result.ok(kongMoonWeatherService.getWeekForecast());
+    }
+
+    @ApiLog(title = "预警信号")
+    @ApiOperation(value = "预警信号", notes = "预警信号", consumes = "application/json")
+    @PostMapping(value = "/getWarningSignal", produces = "application/json; charset=UTF-8")
+    public Result<List<WeatherWarningSignalVO>> getWarningSignal() throws Exception {
+        return Result.ok(kongMoonWeatherService.getWarningSignal());
     }
 
 }

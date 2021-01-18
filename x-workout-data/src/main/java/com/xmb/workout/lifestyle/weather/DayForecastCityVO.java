@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2021-01-14
  * @desc
  */
-@ApiModel(value = "今天城市天气预报VO")
+@ApiModel(value = "未来24小时城市天气预报VO")
 @Data
 public class DayForecastCityVO {
 
