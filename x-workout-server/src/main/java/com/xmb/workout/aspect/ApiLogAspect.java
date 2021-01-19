@@ -60,6 +60,8 @@ public class ApiLogAspect {
         String requestURI = WebUtil.getRequest().getRequestURI();
         //请求端的host
         String remoteHost = WebUtil.getRequest().getRemoteHost();
+        //请求客户端信息
+        String userAgent = WebUtil.getRequest().getHeader(WebUtil.USER_AGENT_HEADER);
         //请求端IP地址
         String remoteIp = WebUtil.getIP(WebUtil.getRequest());
         //获取类名
@@ -102,6 +104,7 @@ public class ApiLogAspect {
         apiLogEntity.setRequestUri(requestURI);
         apiLogEntity.setRemoteHost(remoteHost);
         apiLogEntity.setRemoteIp(remoteIp);
+        apiLogEntity.setUserAgent(userAgent);
         apiLogEntity.setMethodClass(className);
         apiLogEntity.setMethodName(methodName);
         apiLogEntity.setParams(params);

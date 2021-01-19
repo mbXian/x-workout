@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import sun.management.resources.agent;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -51,6 +53,9 @@ public class ApiLogEntity implements Serializable {
 
     @ApiModelProperty("请求端IP地址")
     private String remoteIp;
+
+    @ApiModelProperty("请求客户端信息")
+    private String userAgent;
 
     @ApiModelProperty("方法类")
     private String methodClass;

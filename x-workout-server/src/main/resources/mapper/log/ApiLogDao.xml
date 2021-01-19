@@ -16,6 +16,7 @@
         <result property="requestUri" column="request_uri"/>
         <result property="remoteHost" column="remote_host"/>
         <result property="remoteIp" column="remote_ip"/>
+        <result property="userAgent" column="user_agent"/>
         <result property="methodClass" column="method_class"/>
         <result property="methodName" column="method_name"/>
         <result property="params" column="params"/>
