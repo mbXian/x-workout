@@ -58,7 +58,7 @@ public class ApiLogAspect {
         //请求端的host
         String remoteHost = WebUtil.getRequest().getRemoteHost();
         //请求端IP地址
-        String remoteIp = WebUtil.getRemortIP(WebUtil.getRequest());
+        String remoteIp = WebUtil.getIP(WebUtil.getRequest());
         //获取类名
         String className = point.getTarget().getClass().getName();
         //获取方法

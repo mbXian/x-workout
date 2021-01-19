@@ -139,6 +139,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
             "x-forwarded-for",
             "Proxy-Client-IP",
             "WL-Proxy-Client-IP",
+            "X-Real-IP",
             "HTTP_CLIENT_IP",
             "HTTP_X_FORWARDED_FOR"
     };
@@ -154,7 +155,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
     @Nullable
     public static String getIP(@Nullable HttpServletRequest request) {
         if (request == null) {
-            return StringPool.EMPTY;
+            return null;
         }
         String ip = null;
         for (String ipHeader : IP_HEADER_NAMES) {
@@ -281,19 +282,6 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
             ex.printStackTrace();
             return StringPool.EMPTY;
         }
-    }
-
-    /**
-     * 获取客户端的IP
-     *
-     * @param request
-     * @return
-     */
-    public static String getRemortIP(HttpServletRequest request) {
-        if (request.getHeader("x-forwarded-for") == null) {
-            return request.getRemoteAddr();
-        }
-        return request.getHeader("x-forwarded-for");
     }
 
 }
