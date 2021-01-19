@@ -2,9 +2,12 @@ package com.xmb.workout.aspect;
 
 import com.alibaba.fastjson.JSON;
 import com.xmb.workout.annotation.ApiLog;
+import com.xmb.workout.event.ApiLogEvent;
 import com.xmb.workout.log.constant.LogTypeEnum;
 import com.xmb.workout.log.entity.ApiLogEntity;
 import com.xmb.workout.log.service.ApiLogService;
+import com.xmb.workout.publisher.ApiLogPublisher;
+import com.xmb.workout.utils.SpringUtil;
 import com.xmb.workout.utils.network.WebUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -16,6 +19,8 @@ import org.springframework.stereotype.Component;
 
 import java.net.InetAddress;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Ben
@@ -27,8 +32,6 @@ import java.util.Date;
 @Aspect
 public class ApiLogAspect {
 
-    @Autowired
-    private ApiLogService apiLogService;
     @Value("${spring.application.name}")
     private String applicationName;
     @Value("${spring.profiles.active}")
@@ -105,8 +108,9 @@ public class ApiLogAspect {
         apiLogEntity.setResult(resultJsonString);
         apiLogEntity.setStartTime(startTime);
         apiLogEntity.setEndTime(endTime);
-        apiLogService.save(apiLogEntity);
 
+        //异步记录api日志
+        ApiLogPublisher.publishEvent(apiLogEntity);
         return result;
     }
 

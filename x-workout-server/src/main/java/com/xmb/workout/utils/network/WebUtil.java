@@ -8,12 +8,9 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.method.HandlerMethod;
-
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -275,7 +272,9 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
                     String value = request.getParameter(key);
                     sb.append(key + "=" + value + "&");
                 }
-                str = sb.toString().substring(0, sb.toString().length() - 1);
+                if (sb.length() > 1) {
+                    str = sb.toString().substring(0, sb.toString().length() - 1);
+                }
             }
             return str.replaceAll("&amp;", "&");
         } catch (Exception ex) {
