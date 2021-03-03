@@ -8,11 +8,10 @@ eureka:
     # Eureka客户端向服务端发送心跳的时间间隔，单位为秒（客户端告诉服务端自己会按照该规则）
     lease-renewal-interval-in-seconds: 5
     instance-id: ${spring.application.name}:${server.port}
-    hostname: x-workout
   client:
     # 注册中心
     serviceUrl:
-      defaultZone: http://x-eureka-1:2101/eureka/
+      defaultZone: http://192.168.0.3:2100/eureka/
 
 spring:
   # mysql
@@ -20,7 +19,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     #MySQL配置
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://x-mysql:3306/x_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.0.2:3306/x_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: xmb123456
   jackson:
@@ -32,9 +31,9 @@ spring:
   redis:
     open: true  # 是否开启redis  true开启   false关闭
     database: 0
-    host: x-redis
+    host: 192.168.0.4
     port: 6379
-    password: 123456   # 密码（默认为空）
+    password:    # 密码（默认为空）
     timeout: 6000  # 连接超时时长（毫秒）
     jedis:
       pool:
@@ -44,4 +43,4 @@ spring:
         min-idle: 5       # 连接池中的最小空闲连接
 
 logback:
-  path: /home/workspace/x-workout
+  path: /Users/xian/Desktop/log3
