@@ -12,7 +12,7 @@ eureka:
   client:
     # 注册中心
     serviceUrl:
-      defaultZone: http://x-eureka-1:2101/eureka/
+      defaultZone: http://x-eureka:2100/eureka/
 
 spring:
   # mysql
@@ -44,4 +44,4 @@ spring:
         min-idle: 5       # 连接池中的最小空闲连接
 
 logback:
-  path: /home/workspace/x-workout
+  path: /home/logs
