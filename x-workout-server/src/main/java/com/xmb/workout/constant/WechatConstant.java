@@ -42,15 +42,9 @@ public interface WechatConstant {
 	String INVALID_TAG = "invalidtag";
 
 	String WECHAT_ACCESS_TOKEN_KEY = "wechat:access_token";
-	String WECHAT_WORK_ACCESS_TOKEN_KEY = "blade:wechat_work:access_token:";
 	long ACCESS_TOKEN_REDIS_EXPIRE_SECONDS = 7000L;
 
-	String WECHAT_WORK_JSAPI_TICKET_KEY = "blade:wechat_work:jsapi_ticket:";
-	String WECHAT_JSAPI_TICKET_KEY = "blade:wechat:jsapi_ticket:";
-	long JSAPI_TICKET_REDIS_EXPIRE_SECONDS = 7000L;
-	long WECHAT_WORK_JSAPI_TICKET_REDIS_EXPIRE_SECONDS = 7000L;
-
-	String WECHAT_CONFIG_KEY = "blade:wechat:config:";
-	long WECHAT_CONFIG_REDIS_EXPIRE_SECONDS = 86400L;
+	String WECHAT_SESSION_KEY = "wechat:session:";
+	long SESSION_KEY_REDIS_EXPIRE_SECONDS = 7000L;
 
 }

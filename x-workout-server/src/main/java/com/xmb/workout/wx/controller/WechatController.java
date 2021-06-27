@@ -3,9 +3,11 @@ package com.xmb.workout.wx.controller;
 import com.xmb.auth.controller.BaseController;
 import com.xmb.common.network.Result;
 import com.xmb.workout.annotation.ApiLog;
+import com.xmb.workout.wx.dto.WxRunDataDTO;
 import com.xmb.workout.wx.entity.WechatAccessToken;
 import com.xmb.workout.wx.entity.WechatCode2Session;
 import com.xmb.workout.wx.service.IWechatService;
+import com.xmb.workout.wx.vo.WxRunDataVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -42,6 +44,14 @@ public class WechatController extends BaseController {
     public Result<WechatCode2Session> getSession(@ApiParam(value = "jsCode", required = true) @RequestParam(required = true)String jsCode) {
         WechatCode2Session wechatCode2Session = wechatService.getSession(jsCode);
         return Result.ok(wechatCode2Session);
+    }
+
+    @ApiLog(title = "解密微信运动数据")
+    @ApiOperation(value = "解密微信运动数据",notes = "解密微信运动数据",consumes = "application/json")
+    @PostMapping("/decryptRunData")
+    public Result<WxRunDataVO> decryptRunData(@RequestBody WxRunDataDTO wxRunDataDTO) throws Exception {
+        WxRunDataVO wxRunDataVO = wechatService.decryptRunData(wxRunDataDTO.getOpenId(), wxRunDataDTO.getEncryptedData(), wxRunDataDTO.getIv());
+        return Result.ok(wxRunDataVO);
     }
 
 }
