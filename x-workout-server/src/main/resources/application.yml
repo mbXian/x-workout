@@ -1,6 +1,9 @@
 # server config
 server:
   port: 8091
+  ssl:
+    key-store: classpath:5891275_seaven.cn.jks
+    key-store-password: HrIffInb
 
 spring:
   application:
